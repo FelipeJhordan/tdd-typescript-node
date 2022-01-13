@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/FelipeJhordan/tdd-typescript-node/issues"
   },
-  "homepage": "https://github.com/FelipeJhordan/tdd-typescript-node#readme"
+  "homepage": "https://github.com/FelipeJhordan/tdd-typescript-node#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.3.3"
+  }
 }
