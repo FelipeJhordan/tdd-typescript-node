@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/**/*-protocols.ts',
     '!**/protocols/**'
-  ]
+  ],
+  preset: '@shelf/jest-mongodb'
 }
