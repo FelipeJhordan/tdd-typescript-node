@@ -1,3 +1,13 @@
+# Libs
 node_modules
+
+# Output
 dist
+
+
+
+# Tests
+globalConfig.json
 coverage
+
+
