@@ -11,3 +11,7 @@ globalConfig.json
 coverage
 
 
+# Docker
+data
+
+
