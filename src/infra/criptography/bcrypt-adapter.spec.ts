@@ -6,10 +6,10 @@ import { BcryptAdapter } from './bcrypt-adapter'
 // o que importa aqui é testar se o metodo retorna algo
 jest.mock('bcrypt', () => ({
   async hash (): Promise<string> {
-    return await new Promise(resolve => resolve('hash'))
+    return Promise.resolve('hash')
   },
   async compare (): Promise<boolean> {
-    return await new Promise(resolve => resolve(true))
+    return Promise.resolve(true)
   }
 }))
 
@@ -32,7 +32,7 @@ describe('Bcrypt Adapter', () => {
     expect(hash).toBe('hash')
   })
 
-  test('Should throws Error if bcrypt throws error', async () => {
+  test('Should throws Error if hash throws ', async () => {
     const sut = makeSut()
     jest.spyOn(bcrypt, 'hash').mockImplementationOnce(() => {
       throw new Error()
@@ -57,5 +57,12 @@ describe('Bcrypt Adapter', () => {
     jest.spyOn(bcrypt, 'compare').mockImplementationOnce(() => false)
     const isValid = await sut.compare('any_value', 'any_hash')
     expect(isValid).toBeFalsy()
+  })
+
+  test('Should throws if compare throw', async () => {
+    const sut = makeSut()
+    jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => await Promise.reject(new Error()))
+    const promise = sut.compare('any_value', 'any_hash')
+    await expect(promise).rejects.toThrow()
   })
 })
