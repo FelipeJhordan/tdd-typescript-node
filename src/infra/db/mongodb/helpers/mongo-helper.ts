@@ -1,4 +1,4 @@
-import { Collection, ConnectionOptions, MongoClient } from 'mongodb'
+import { Collection, ConnectionOptions, MongoClient, ObjectId } from 'mongodb'
 
 export const MongoHelper = {
   client: null as MongoClient,
@@ -28,6 +28,8 @@ export const MongoHelper = {
       accountWithoutId,
       { id: _id.toHexString() }
     )
-  }
+  },
+
+  getObjectId: (value: string): ObjectId => new ObjectId(value)
 
 }
