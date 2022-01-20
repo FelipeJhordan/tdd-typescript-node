@@ -1,6 +1,7 @@
 import { badRequest, noContent, serverError } from './../../../helpers/http/http-helper'
 import { AddSurveyController } from './add-survey-controller'
 import { AddSurvey, AddSurveyModel, HttpRequest, Validation } from './add-survey-controller-protocols'
+import mockDate from 'mockdate'
 
 const makeFakeRequest = ():HttpRequest => ({
   body: {
@@ -8,7 +9,8 @@ const makeFakeRequest = ():HttpRequest => ({
     answers: [{
       image: 'any_image',
       answer: 'any_answer'
-    }]
+    }],
+    date: new Date()
   }
 })
 
@@ -51,6 +53,14 @@ const makeValidation = (): Validation => {
 }
 
 describe('AddSurvey Controller', () => {
+  beforeAll(() => {
+    mockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    mockDate.reset()
+  })
+
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
