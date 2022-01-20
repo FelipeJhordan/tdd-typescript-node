@@ -3,7 +3,7 @@ import { SurveyModel } from '@/domain/models/survey'
 import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 import { DbLoadSurveyById } from './db-load-survey-by-id'
 
-const makeFakeSurveys = (): SurveyModel => ({
+const makeFakeSurvey = (): SurveyModel => ({
   id: 'any_id',
   question: 'any_question',
   date: new Date(),
@@ -18,7 +18,7 @@ const makeFakeSurveys = (): SurveyModel => ({
 const makeLoadSurveyByIdRepositoryStub = () => {
   class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
     async loadById (): Promise<SurveyModel> {
-      return makeFakeSurveys()
+      return makeFakeSurvey()
     }
   }
 
@@ -53,5 +53,10 @@ describe('DbLoadSurveyById UseCase', () => {
     await sut.loadById('any_id')
 
     expect(loadIdSpy).toHaveBeenCalledWith('any_id')
+  })
+  test('Should return Surveys on success', async () => {
+    const { sut } = makeSut()
+    const surveys = await sut.loadById('any_id')
+    expect(surveys).toEqual(makeFakeSurvey())
   })
 })
