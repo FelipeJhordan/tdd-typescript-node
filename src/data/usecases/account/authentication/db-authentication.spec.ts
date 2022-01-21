@@ -1,6 +1,6 @@
 import {
   Encrypter,
-  AuthenticationModel,
+  AuthenticationParams,
   HashComparer,
   LoadAccountByEmailRepository,
   AccountModel,
@@ -34,7 +34,7 @@ const makeHashComparer = (): HashComparer => {
   return new HashComparerStub()
 }
 
-const makeFakeAuthentication = (): AuthenticationModel => ({
+const makeFakeAuthentication = (): AuthenticationParams => ({
   email: 'any_email@gmail.com',
   password: 'any_password'
 })
