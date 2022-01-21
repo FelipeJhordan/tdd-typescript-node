@@ -9,7 +9,8 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '<rootDir>/src/main/**',
     '!<rootDir>/src/**/*-protocols.ts',
-    '!**/protocols/**'
+    '!**/protocols/**',
+    '!**/test/**'
   ],
   preset: '@shelf/jest-mongodb',
   moduleNameMapper: {
