@@ -41,7 +41,7 @@ describe('Survey Routes', () => {
     surveyCollection = await MongoHelper.getColletion('surveys')
     await surveyCollection.deleteMany({})
     accountCollection = await MongoHelper.getColletion('accounts')
-    await surveyCollection.deleteMany({})
+    await accountCollection.deleteMany({})
   })
 
   describe('POST /surveys', () => {
