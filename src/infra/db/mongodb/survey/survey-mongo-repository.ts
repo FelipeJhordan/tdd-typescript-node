@@ -11,7 +11,7 @@ export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRe
     const surveys: SurveyModel[] = (await surveyCollection.find().toArray())
       .map((survey: unknown) => survey as SurveyModel)
 
-    return surveys
+    return MongoHelper.mapCollection(surveys)
   }
 
   async add (surveyData: AddSurveyModel): Promise<void> {
@@ -22,6 +22,6 @@ export class SurveyMongoRepository implements AddSurveyRepository, LoadSurveysRe
   async loadById (id: string): Promise<SurveyModel> {
     const surveyCollection = await MongoHelper.getColletion('surveys')
     const survey = await surveyCollection.findOne({ _id: MongoHelper.getObjectId(id) })
-    return survey as unknown as SurveyModel
+    return survey && MongoHelper.map(survey)
   }
 }
