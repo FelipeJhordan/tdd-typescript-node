@@ -1,5 +1,5 @@
 import { mockLoadSurveyResultRepository } from '@/data/test/mock-db-survey-result'
-import { throwError } from '@/domain/test'
+import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { DbLoadSurveyResult } from './db-load-survey-result'
 import { LoadSurveyResultRepository } from './db-load-survey-result-protocols'
 
@@ -33,5 +33,13 @@ describe('DbLoadSurveyResult UseCase', () => {
 
     const promise = sut.load('any_survey_id')
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return surveyResultModel on success', async () => {
+    const { sut } = makeSut()
+
+    const surveyResult = await sut.load('any_survey_id')
+
+    expect(surveyResult).toEqual(mockSurveyResultModel())
   })
 })
