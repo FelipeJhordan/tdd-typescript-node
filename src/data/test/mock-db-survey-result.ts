@@ -5,8 +5,8 @@ import { SaveSurveyResultParams, SurveyResultModel } from '../usecases/survey-re
 
 export const mockSaveSurveyResultRepository = () => {
   class SaveSurveyResultRepositoryStub implements SaveSurveyResultRepository {
-    async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
-      return mockSurveyResultModel()
+    async save (data: SaveSurveyResultParams): Promise<void> {
+      return Promise.resolve()
     }
   }
 
