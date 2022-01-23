@@ -6,7 +6,6 @@ import { HttpRequest } from '@/presentation/protocols'
 import { SignUpController } from './signup-controller'
 import {
   AddAccount,
-
   Authentication,
   Validation
 } from './signup-controller-protocols'
