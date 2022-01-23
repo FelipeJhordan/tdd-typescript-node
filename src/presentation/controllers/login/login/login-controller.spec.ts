@@ -2,7 +2,7 @@ import { LoginController } from './login-controller'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http/http-helper'
 import { MissingParamError } from '@/presentation/errors'
 import { HttpRequest, Authentication, Validation } from './login-controller-protocols'
-import { throwError } from '@/domain/test'
+import { mockAccountModel, throwError } from '@/domain/test'
 import { mockAuthentication, mockValidation } from '@/presentation/test'
 
 const mockRequest = (shoudIsValidEmail: boolean = true): HttpRequest => ({
@@ -59,7 +59,10 @@ describe('Login Controller', () => {
     const { sut } = makeSut()
 
     const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpResponse).toEqual(ok({
+      accessToken: 'any_token',
+      name: mockAccountModel().name
+    }))
   })
 
   it('Should call Validation with correct value', async () => {

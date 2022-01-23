@@ -10,7 +10,7 @@ import {
   Authentication,
   Validation
 } from './signup-controller-protocols'
-import { throwError } from '@/domain/test'
+import { mockAccountModel, throwError } from '@/domain/test'
 import { mockAddAccount, mockAuthentication, mockValidation } from '@/presentation/test'
 
 const mockRequest = (): HttpRequest => ({
@@ -74,7 +74,10 @@ describe('SignUp Controller', () => {
   it('Should return 200 if an valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpResponse).toEqual(ok({
+      accessToken: 'any_token',
+      name: mockAccountModel().name
+    }))
   })
 
   it('Should call Validation with correct value', async () => {
