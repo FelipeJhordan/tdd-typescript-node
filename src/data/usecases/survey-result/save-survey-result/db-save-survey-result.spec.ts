@@ -57,7 +57,7 @@ describe('DbSaveSurveyResult UseCase', () => {
 
     await sut.save(surveyResultData)
 
-    expect(loadBySurveySpy).toHaveBeenCalledWith(surveyResultData.surveyId)
+    expect(loadBySurveySpy).toHaveBeenCalledWith(surveyResultData.surveyId, surveyResultData.accountId)
   })
 
   test('Should return SurveyResult on success', async () => {
